@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="stylesheets/style.css" />
+    <title>Epic timer</title>
+  </head>
+  <body>
+    <center>
+      <h1>Epic timer</h1>
+
+      <button onclick="showLogin();">Log in</button>
+      or
+      <button onclick="showSignup();">Create an account</button>
+
+      <br />
+      <br />
+      <br />
+
+      <div id="login-form" style="display: block">
+        <form onsubmit="login(event);">
+          <input type="text" id="username-login" placeholder="Username" />
+          <input type="password" id="password-login" placeholder="Password" />
+          <button>Login</button>
+        </form>
+        <br />
+      </div>
+      <div id="signup-form" style="display: none">
+        <form onsubmit="signup(event);">
+          <input type="text" id="username-signup" placeholder="Username" />
+          <input type="email" id="email-signup" placeholder="Email" />
+          <input type="password" id="password-signup" placeholder="Password" />
+          <button>Sign up</button>
+        </form>
+        <br />
+      </div>
+      <div class="error-message"></div>
+    </center>
+  </body>
+  <script>
+    function showLogin() {
+      document.getElementById("login-form").style.display = "block";
+      document.getElementById("signup-form").style.display = "none";
+    }
+
+    function showSignup() {
+      document.getElementById("login-form").style.display = "none";
+      document.getElementById("signup-form").style.display = "block";
+    }
+
+    function login(e) {
+      e.preventDefault();
+
+      let username = document.getElementById("username-login").value;
+      let password = document.getElementById("password-login").value;
+
+      fetch("/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.error) {
+            document.querySelector(".error-message").innerHTML = data.error;
+          } else {
+            storeToken(data.token);
+
+            document.location.reload();
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+
+    function signup(e) {
+      e.preventDefault();
+
+      let username = document.getElementById("username-signup").value;
+      let password = document.getElementById("password-signup").value;
+      let email = document.getElementById("email-signup").value;
+      fetch("/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: username,
+          email: email,
+          password: password,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.error) {
+            document.querySelector(".error-message").innerHTML = data.error;
+            console.log(data.error);
+          } else {
+            document.location.reload();
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+
+    function storeToken(token) {
+      document.cookie =
+        "token=" +
+        token +
+        "; Expires=" +
+        new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString(); // 30 days
+    }
+  </script>
+</html>
