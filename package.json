@@ -4,7 +4,8 @@
   "description": "A timer for speedcubing with auto sync with the cloud.",
   "main": "/src/app.js",
   "scripts": {
-    "start": "nodemon app.js -e ejs,js,css"
+    "start": "nodemon app.js -e ejs,js,css",
+    "tailwind": "npx tailwindcss -i css/tailwind.css -o public/stylesheets/style.css --watch"
   },
   "repository": {
     "type": "git",
@@ -25,5 +26,8 @@
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.3",
     "nodemon": "^2.0.16"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.1.8"
   }
 }
