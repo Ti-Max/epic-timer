@@ -555,10 +555,68 @@ video {
   display: block;
 }
 
-.text-center {
-  text-align: center;
+.flex {
+  display: flex;
 }
 
-.font-sans {
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+.h-16 {
+  height: 4rem;
+}
+
+.h-screen {
+  height: 100vh;
+}
+
+.h-\[90rem\] {
+  height: 90rem;
+}
+
+.h-\[90\%\] {
+  height: 90%;
+}
+
+.h-\[90vh\] {
+  height: 90vh;
+}
+
+.h-\[80vh\] {
+  height: 80vh;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-self-center {
+  justify-self: center;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.text-\[48px\] {
+  font-size: 48px;
+}
+
+.text-\[70px\] {
+  font-size: 70px;
+}
+
+.text-\[4rem\] {
+  font-size: 4rem;
+}
+
+.text-\[10rem\] {
+  font-size: 10rem;
+}
+
+.text-blue-700 {
+  --tw-text-opacity: 1;
+  color: rgb(29 78 216 / var(--tw-text-opacity));
 }

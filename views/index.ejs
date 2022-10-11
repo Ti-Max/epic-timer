@@ -9,10 +9,87 @@
   </head>
   <body>
     <center>
-      <h1>Epic timer</h1>
+      <div class="text-2xl">Epic Timer</div>
       You are logged in!
-      Hello <%= user.user_id %> 
-      <a href="./logout">logout</a>
+      <br />
+      Hello <%= user.user_id %>
+      <br />
+      <a href="./logout" class="text-blue-700">logout</a>
+      <br />
+
+      <div class="flex h-[80vh] justify-center items-center">
+        <div class="text-[10rem] justify-self-center" id="timer">0.00</div>
+      </div>
     </center>
   </body>
 </html>
+<script>
+  const timer = document.getElementById("timer");
+  const waitMargin = 0.3;
+
+  let time = 0.0;
+
+  // timers
+  let timerInterval;
+  let readyTimeout;
+
+  let isRunning = false;
+  let isWaited = false;
+  let isTouched = false;
+
+  document.addEventListener("keydown", (event) => {
+    if (event.keyCode !== 32) return;
+
+    if (isRunning) {
+      // Stop timer
+      clearInterval(timerInterval);
+      timer.innerText = time.toFixed(2);
+      isTouched = false;
+      isWaited = false;
+      timer.style.color = "red";
+      // TODO: Sync time
+    } else if (!isTouched) {
+      // Timer touched
+      isTouched = true;
+      timer.style.color = "red";
+
+      readyTimeout = setTimeout(function () {
+        // Timer ready
+        timer.innerText = "0.00";
+        timer.style.color = "green";
+        isWaited = true;
+      }, waitMargin * 1000);
+    }
+  });
+
+  document.addEventListener("keyup", (event) => {
+    if (event.keyCode !== 32) return;
+
+    // Check if timer is running
+    if (isRunning === false) {
+      if (!isWaited) {
+        // Waited not long enough!
+        clearTimeout(readyTimeout);
+        timer.style.color = "black";
+        isTouched = false;
+        return;
+      }
+
+      // Start timer!
+      time = 0;
+      timerInterval = setInterval(tick, 10);
+      isRunning = true;
+      timer.style.color = "black";
+    }
+    else {
+      // Timer button released after timer stop
+      timer.style.color = "black";
+      isRunning = false;
+    }
+  });
+
+  function tick() {
+    time += 0.01;
+    timer.innerText = time.toFixed(1);
+  }
+</script>
