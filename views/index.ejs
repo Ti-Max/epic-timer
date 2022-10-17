@@ -6,24 +6,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="stylesheets/style.css" />
     <title>Epic timer</title>
-  </head>
-  <body>
-    <center>
-      <div class="text-2xl">Epic Timer</div>
-      You are logged in!
-      <br />
-      Hello <%= user.user_id %>
-      <br />
-      <a href="./logout" class="text-blue-700">logout</a>
-      <br />
+    <style>
+      /* width */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
 
-      <div class="flex h-[80vh] justify-center items-center">
-        <div class="text-[10rem] justify-self-center" id="timer">0.00</div>
+      /* Track */
+      ::-webkit-scrollbar-track {
+        background: <%= colors.tertiary %> ;
+      }
+
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: <%= colors.secondary %>;
+      }
+
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+        background: <%= colors.secondaryAlt %>;
+      }
+      </style>
+  </head>
+
+  <body class="h-screen bg-backgroud text-text">
+    <div class="grid grid-rows-1 m-auto max-w-6xl p-4 min-h-screen">
+
+      <div class="flex justify-between">
+        <div class="text-3xl text-primary">Epic Timer</div>
+        <div class="text-center text-primary">
+          <%= user.user_id %>
+          <br>
+          <a href="./logout" class="transition-all text-secondary hover:text-text">logout</a>
+        </div>
       </div>
-    </center>
+
+      <div class="flex h-[85vh] justify-between items-center ">
+        <div></div>
+        <div class="text-[10rem]" id="timer">0.00</div>
+        <div class="max-h-40 overflow-y-auto pr-3" id="solves">
+          <div class="flex p-1 pl-2 pr-2 m-1 rounded-md bg-tertiary  justify-between ">
+            <div class="text-xs align-text-top text-secondary">#11</div>
+            <div class="text-base ml-1">15.54</div>
+          </div>
+          <div class="flex p-1 pl-2 pr-2 m-1 rounded-md bg-tertiary  justify-between ">
+            <div class="text-xs align-text-top text-secondary">#10</div>
+            <div class="text-base ml-1">15.54</div>
+          </div>
+          <div class="flex p-1 pl-2 pr-2 m-1 rounded-md bg-tertiary  justify-between ">
+            <div class="text-xs align-text-top text-secondary">#9</div>
+            <div class="text-base ml-1">15.54</div>
+          </div>
+          <div class="flex p-1 pl-2 pr-2 m-1 rounded-md bg-tertiary  justify-between ">
+            <div class="text-xs align-text-top text-secondary">#8</div>
+            <div class="text-base ml-1">15.54</div>
+          </div>
+          <div class="flex p-1 pl-2 pr-2 m-1 rounded-md bg-tertiary  justify-between ">
+            <div class="text-xs align-text-top text-secondary">#7</div>
+            <div class="text-base ml-1">15.54</div>
+          </div>
+          <div class="flex p-1 pl-2 pr-2 m-1 rounded-md bg-tertiary  justify-between ">
+            <div class="text-xs align-text-top text-secondary">#6</div>
+            <div class="text-base ml-1">15.54</div>
+          </div>
+          <div class="flex p-1 pl-2 pr-2 m-1 rounded-md bg-tertiary  justify-between ">
+            <div class="text-xs align-text-top text-secondary">#5</div>
+            <div class="text-base ml-1">15.54</div>
+          </div>
+          <div class="flex p-1 pl-2 pr-2 m-1 rounded-md bg-tertiary  justify-between ">
+            <div class="text-xs align-text-top text-secondary">#4</div>
+            <div class="text-base ml-1">15.54</div>
+          </div>
+          <div class="flex p-1 pl-2 pr-2 m-1 rounded-md bg-tertiary  justify-between ">
+            <div class="text-xs align-text-top text-secondary">#3</div>
+            <div class="text-base ml-1">15.54</div>
+          </div>
+          <div class="flex p-1 pl-2 pr-2 m-1 rounded-md bg-tertiary  justify-between ">
+            <div class="text-xs align-text-top text-secondary">#2</div>
+            <div class="text-base ml-1">15.54</div>
+          </div>
+          <div class="flex p-1 pl-2 pr-2 m-1 rounded-md bg-tertiary  justify-between ">
+            <div class="text-xs align-text-top text-secondary">#1</div>
+            <div class="text-base ml-1">15.54</div>
+          </div>
+
+        </div>
+      </div>
+      
+      <div class="flex justify-between">
+        <div class="text-secondary">Made by <a href="https://github.com/Ti-Max" class="transition-all text-primary hover:text-text">Ti-Max</a></div>
+        <div class="text-secondary"> <a href="https://github.com/Ti-Max/epic-timer" class="transition-all text-primary hover:text-text">v1.0</a></div>
+      </div>
   </body>
 </html>
 <script>
+  // Colors
+  const textColor = '<%= colors.text %>';
+
   const timer = document.getElementById("timer");
   const waitMargin = 0.3;
 
@@ -70,7 +149,7 @@
       if (!isWaited) {
         // Waited not long enough!
         clearTimeout(readyTimeout);
-        timer.style.color = "black";
+        timer.style.color = textColor;
         isTouched = false;
         return;
       }
@@ -79,11 +158,10 @@
       time = 0;
       timerInterval = setInterval(tick, 10);
       isRunning = true;
-      timer.style.color = "black";
-    }
-    else {
+      timer.style.color = textColor;
+    } else {
       // Timer button released after timer stop
-      timer.style.color = "black";
+      timer.style.color = textColor;
       isRunning = false;
     }
   });
