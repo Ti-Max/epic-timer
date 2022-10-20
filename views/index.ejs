@@ -37,7 +37,7 @@
       <div class="flex justify-between">
         <div class="text-3xl text-primary">Epic Timer</div>
         <div class="text-center text-primary">
-          <%= user.user_id %>
+          <%= username %>
           <br>
           <a href="./logout" class="transition-all text-secondary hover:text-text">logout</a>
         </div>
@@ -47,50 +47,15 @@
         <div></div>
         <div class="text-[10rem]" id="timer">0.00</div>
         <div class="max-h-40 overflow-y-auto pr-3" id="solves">
-          <div class="flex p-1 pl-2 pr-2 m-1 rounded-md bg-tertiary  justify-between ">
-            <div class="text-xs align-text-top text-secondary">#11</div>
-            <div class="text-base ml-1">15.54</div>
-          </div>
-          <div class="flex p-1 pl-2 pr-2 m-1 rounded-md bg-tertiary  justify-between ">
-            <div class="text-xs align-text-top text-secondary">#10</div>
-            <div class="text-base ml-1">15.54</div>
-          </div>
-          <div class="flex p-1 pl-2 pr-2 m-1 rounded-md bg-tertiary  justify-between ">
-            <div class="text-xs align-text-top text-secondary">#9</div>
-            <div class="text-base ml-1">15.54</div>
-          </div>
-          <div class="flex p-1 pl-2 pr-2 m-1 rounded-md bg-tertiary  justify-between ">
-            <div class="text-xs align-text-top text-secondary">#8</div>
-            <div class="text-base ml-1">15.54</div>
-          </div>
-          <div class="flex p-1 pl-2 pr-2 m-1 rounded-md bg-tertiary  justify-between ">
-            <div class="text-xs align-text-top text-secondary">#7</div>
-            <div class="text-base ml-1">15.54</div>
-          </div>
-          <div class="flex p-1 pl-2 pr-2 m-1 rounded-md bg-tertiary  justify-between ">
-            <div class="text-xs align-text-top text-secondary">#6</div>
-            <div class="text-base ml-1">15.54</div>
-          </div>
-          <div class="flex p-1 pl-2 pr-2 m-1 rounded-md bg-tertiary  justify-between ">
-            <div class="text-xs align-text-top text-secondary">#5</div>
-            <div class="text-base ml-1">15.54</div>
-          </div>
-          <div class="flex p-1 pl-2 pr-2 m-1 rounded-md bg-tertiary  justify-between ">
-            <div class="text-xs align-text-top text-secondary">#4</div>
-            <div class="text-base ml-1">15.54</div>
-          </div>
-          <div class="flex p-1 pl-2 pr-2 m-1 rounded-md bg-tertiary  justify-between ">
-            <div class="text-xs align-text-top text-secondary">#3</div>
-            <div class="text-base ml-1">15.54</div>
-          </div>
-          <div class="flex p-1 pl-2 pr-2 m-1 rounded-md bg-tertiary  justify-between ">
-            <div class="text-xs align-text-top text-secondary">#2</div>
-            <div class="text-base ml-1">15.54</div>
-          </div>
-          <div class="flex p-1 pl-2 pr-2 m-1 rounded-md bg-tertiary  justify-between ">
-            <div class="text-xs align-text-top text-secondary">#1</div>
-            <div class="text-base ml-1">15.54</div>
-          </div>
+
+          <% solves.forEach((solve)=>{ %>
+
+            <div class="flex p-1 pl-2 pr-2 m-1 rounded-md bg-tertiary  justify-between ">
+              <div class="text-xs align-text-top text-secondary">#<%= solve.id %></div>
+              <div class="text-base ml-1"><%= solve.time %></div>
+            </div>
+
+          <% }); %> 
 
         </div>
       </div>
@@ -128,7 +93,10 @@
       isTouched = false;
       isWaited = false;
       timer.style.color = "red";
-      // TODO: Sync time
+      
+      //Send solve to the database
+      if (!event.repeat)
+        commitSolve();
     } else if (!isTouched) {
       // Timer touched
       isTouched = true;
@@ -168,6 +136,25 @@
     }
   });
 
+  function commitSolve(){
+    fetch('/commitSolve', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          time: time.toFixed(2),
+          category: "overall"
+      })
+    })
+    .then(response => {
+      console.log(1, response)
+      document.getElementById("solves").insertAdjacentHTML("afterbegin", 
+      '<div class="flex p-1 pl-2 pr-2 m-1 rounded-md bg-tertiary  justify-between "><div class="text-xs align-text-top text-secondary">#' + (document.getElementById("solves").childElementCount+1) +'</div><div class="text-base ml-1">' + time.toFixed(2) + '</div></div>'
+      );
+    })
+    .catch(err => console.log(err));
+  }
   function tick() {
     time += 0.01;
     timer.innerText = time.toFixed(1);

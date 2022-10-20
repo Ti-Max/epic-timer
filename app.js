@@ -8,6 +8,7 @@ const auth = require("./routes/access/auth");
 const loginPOST = require("./routes/access/loginPOST");
 const signupPOST = require("./routes/access/signupPOST");
 const logoutPOST = require("./routes/access/logoutGET");
+const commitSolvePOST = require("./routes/commitSovlePOST");
 
 const accessRouter = require("./routes/access/access");
 const indexRouter = require("./routes/index");
@@ -47,6 +48,7 @@ app.use(signupPOST);
 app.use(auth);
 app.use(indexRouter);
 app.use(logoutPOST);
+app.use(commitSolvePOST);
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);

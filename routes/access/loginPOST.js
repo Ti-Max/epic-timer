@@ -22,7 +22,10 @@ router.post("/login", unauth, async function (req, res, next) {
       } else {
         // Create token
         const token = jwt.sign(
-          { user_id: req.body.username },
+          {
+            username: req.body.username,
+            user_id: rows[0].id,
+          },
           process.env.TOKEN_KEY,
           {
             expiresIn: "30d",

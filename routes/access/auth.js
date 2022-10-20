@@ -7,11 +7,12 @@ const verifyToken = (req, res, next) => {
   if (token == null) {
     return res.redirect("./access");
   }
-  jwt.verify(token, process.env.TOKEN_KEY, (err, user) => {
+  jwt.verify(token, process.env.TOKEN_KEY, (err, userinfo) => {
     if (err) return res.redirect("./access");
 
-    req.user = user;
-
+    req.username = userinfo.username;
+    req.user_id = userinfo.user_id;
+    
     return next();
   });
 };
