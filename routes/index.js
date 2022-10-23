@@ -14,7 +14,7 @@ router.get("/", async function (req, res, next) {
   const solves = [];
   for (let i = 0; i < result.length; i++) {
     const solve = result[i];
-    solves.push({ time: solve.time, id: result.length - i });
+    solves.push({ time: formatTime(solve.time, 2), id: result.length - i });
   }
 
   res.render("index", {
@@ -23,5 +23,34 @@ router.get("/", async function (req, res, next) {
     colors: colors,
   });
 });
+
+function formatTime(time, toFixed){
+  const hours = Math.floor(time / 3600);
+  const minutes = Math.floor((time - hours * 3600) / 60);
+  const seconds = time - minutes * 60 - hours * 3600;
+
+  // seconds
+  let text = seconds.toFixed(toFixed);
+
+  // minutes
+  if (minutes > 0){
+    if (seconds < 10){
+      text = "0" + text;
+    }
+
+    text = minutes + ":" + text;
+  }
+
+  // hours
+  if (hours > 0){
+    if (minutes < 10){
+      text = "0" + text;
+    }
+
+    text = hours + ":" + text;
+  }
+
+  return text;
+}
 
 module.exports = router;

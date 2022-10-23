@@ -89,7 +89,7 @@
     if (isRunning) {
       // Stop timer
       clearInterval(timerInterval);
-      timer.innerText = time.toFixed(2);
+      timer.innerText = formatTime(time, 2);
       isTouched = false;
       isWaited = false;
       timer.style.color = "red";
@@ -149,13 +149,42 @@
     })
     .then(response => {
       document.getElementById("solves").insertAdjacentHTML("afterbegin", 
-      '<div class="flex p-1 pl-2 pr-2 m-1 rounded-md bg-tertiary  justify-between "><div class="text-xs align-text-top text-secondary">#' + (document.getElementById("solves").childElementCount+1) +'</div><div class="text-base ml-1">' + time.toFixed(2) + '</div></div>'
+      '<div class="flex p-1 pl-2 pr-2 m-1 rounded-md bg-tertiary  justify-between "><div class="text-xs align-text-top text-secondary">#' + (document.getElementById("solves").childElementCount+1) +'</div><div class="text-base ml-1">' + formatTime(time, 2) + '</div></div>'
       );
     })
     .catch(err => console.log(err));
   }
   function tick() {
-    time += 0.01;
-    timer.innerText = time.toFixed(1);
+    time += 0.1;
+    timer.innerText = formatTime(time, 1);
+  }
+
+  function formatTime(time, toFixed){
+    const hours = Math.floor(time / 3600);
+    const minutes = Math.floor((time - hours * 3600) / 60);
+    const seconds = time - minutes * 60 - hours * 3600;
+
+    // seconds
+    let text = seconds.toFixed(toFixed);
+
+    // minutes
+    if (minutes > 0){
+      if (seconds < 10){
+        text = "0" + text;
+      }
+
+      text = minutes + ":" + text;
+    }
+
+    // hours
+    if (hours > 0){
+      if (minutes < 10){
+        text = "0" + text;
+      }
+
+      text = hours + ":" + text;
+    }
+
+    return text;
   }
 </script>
