@@ -14,7 +14,16 @@ router.get("/", async function (req, res, next) {
   const solves = [];
   for (let i = 0; i < result.length; i++) {
     const solve = result[i];
-    solves.push({ time: formatTime(solve.time, 2), id: result.length - i });
+    const solveData = {};
+
+    solveData.time = formatTime(solve.time, 2);
+    if (solve.ao5)
+      solveData.ao5 = (solve.ao5.toFixed(2) == "0.00") ? undefined : solve.ao5.toFixed(2);
+    if (solve.ao12)
+      solveData.ao12 = (solve.ao12.toFixed(2) == "0.00") ? undefined : solve.ao12.toFixed(2);
+    solveData.id = result.length - i;
+
+    solves.push(solveData);
   }
 
   res.render("index", {
@@ -24,7 +33,7 @@ router.get("/", async function (req, res, next) {
   });
 });
 
-function formatTime(time, toFixed){
+function formatTime(time, toFixed) {
   const hours = Math.floor(time / 3600);
   const minutes = Math.floor((time - hours * 3600) / 60);
   const seconds = time - minutes * 60 - hours * 3600;
@@ -33,8 +42,8 @@ function formatTime(time, toFixed){
   let text = seconds.toFixed(toFixed);
 
   // minutes
-  if (minutes > 0){
-    if (seconds < 10){
+  if (minutes > 0) {
+    if (seconds < 10) {
       text = "0" + text;
     }
 
@@ -42,8 +51,8 @@ function formatTime(time, toFixed){
   }
 
   // hours
-  if (hours > 0){
-    if (minutes < 10){
+  if (hours > 0) {
+    if (minutes < 10) {
       text = "0" + text;
     }
 

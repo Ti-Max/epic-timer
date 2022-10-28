@@ -45,8 +45,38 @@
 
       <div class="flex h-[85vh] justify-between items-center ">
         <div></div>
-        <div class="text-[10rem]" id="timer">0.00</div>
-        <div class="max-h-40 overflow-y-auto pr-3" id="solves">
+        <div>
+          <div class="text-[14rem] leading-[12rem] mb-12" id="timer">0.00</div>
+          <div class="flex justify-center items-center">
+            <div>
+              <div id="ao5" class="text-[4rem] text-secondary pr-2 pb-2 border-r-2 border-tertiary leading-[3rem]">
+                <% 
+                if(solves[0] !== undefined && solves[0].ao5 > 0)
+                {%>
+                  <%=solves[0].ao5 %>
+                <%}else
+                {
+                  %>-<%
+                }%>
+              </div>
+              <div class="text-[1rem] text-secondary text-center">ao5</div>
+            </div>
+            <div>
+              <div id="ao12" class="text-[4rem] text-secondary pl-2 pb-2 leading-[3rem]">
+                <% 
+                if(solves[0] !== undefined && solves[0].ao12 > 0)
+                {%>
+                  <%=solves[0].ao12 %>
+                <%}else
+                {
+                  %>-<%
+                }%>
+              </div>
+              <div class="text-[1rem] text-secondary text-center">ao12</div>
+            </div>
+          </div>
+        </div>
+        <div class="max-h-80 overflow-y-auto pr-3" id="solves">
 
           <% solves.forEach((solve)=>{ %>
 
@@ -147,10 +177,14 @@
           category: "overall"
       })
     })
+    .then((response) => response.json())
     .then(response => {
       document.getElementById("solves").insertAdjacentHTML("afterbegin", 
       '<div class="flex p-1 pl-2 pr-2 m-1 rounded-md bg-tertiary  justify-between "><div class="text-xs align-text-top text-secondary">#' + (document.getElementById("solves").childElementCount+1) +'</div><div class="text-base ml-1">' + formatTime(time, 2) + '</div></div>'
       );
+      console.log(response.ao5);
+      document.getElementById("ao5").innerText = response.ao5 !== 0? response.ao5.toFixed(2): "-";
+      document.getElementById("ao12").innerText = response.ao12 !== 0? response.ao12.toFixed(2): "-";
     })
     .catch(err => console.log(err));
   }

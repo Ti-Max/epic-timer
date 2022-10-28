@@ -61,7 +61,7 @@ function getSolvesfromCategory(user_id, category) {
 }
 
 function padTo2Digits(num) {
-  return num.toString().padStart(2, '0');
+  return num.toString().padStart(2, "0");
 }
 
 function formatDate(date) {
@@ -70,22 +70,22 @@ function formatDate(date) {
       date.getFullYear(),
       padTo2Digits(date.getMonth() + 1),
       padTo2Digits(date.getDate()),
-    ].join('-') +
-    ' ' +
+    ].join("-") +
+    " " +
     [
       padTo2Digits(date.getHours()),
       padTo2Digits(date.getMinutes()),
       padTo2Digits(date.getSeconds()),
-    ].join(':')
+    ].join(":")
   );
 }
 
 // Insert one solve
-function insertSolve(user_id, category, time) {
+function insertSolve(user_id, category, time, ao5, ao12) {
   return new Promise(function (resolve, reject) {
     con.query(
-      "INSERT INTO times VALUES(?, ?, ?, ?)",
-      [user_id, category, formatDate(new Date()), time],
+      "INSERT INTO times (users_id, category, date, time, ao5, ao12) VALUES(?, ?, ?, ?, ?, ?)",
+      [user_id, category, formatDate(new Date()), time, ao5, ao12],
       function (err, result, fields) {
         if (err) throw err;
         resolve();
@@ -94,4 +94,24 @@ function insertSolve(user_id, category, time) {
   });
 }
 
-module.exports = { createUser, getInfoByUsername, getInfoByEmail, getSolvesfromCategory, insertSolve };
+function getLastSolves(user_id, category, amount) {
+  return new Promise(function (resolve, reject) {
+    con.query(
+      "SELECT time FROM times WHERE users_id = ? AND category = ? ORDER BY date DESC LIMIT ?",
+      [user_id, category, amount],
+      function (err, result, fields) {
+        if (err) throw err;
+        resolve(result);
+      }
+    );
+  });
+}
+
+module.exports = {
+  createUser,
+  getInfoByUsername,
+  getInfoByEmail,
+  getSolvesfromCategory,
+  insertSolve,
+  getLastSolves,
+};
