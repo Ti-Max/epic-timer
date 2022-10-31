@@ -8,6 +8,9 @@ const getInfoByEmail = require("./userActionsDB.js").getInfoByEmail;
 const getInfoByUsername = require("./userActionsDB.js").getInfoByUsername;
 const createUser = require("./userActionsDB.js").createUser;
 
+// Hashing password
+const hashPassword = require("./crypto.js").hashPassword;
+
 router.post("/signup", async function (req, res, next) {
   // Check input data
   if (!req.body.username || !req.body.password || !req.body.email) {
@@ -25,7 +28,7 @@ router.post("/signup", async function (req, res, next) {
       return res.status(409).json({ error: "Email already in use" });
     } else {
       // Create user
-      await createUser(req.body.username, req.body.email, req.body.password);
+      await createUser(req.body.username, req.body.email, await hashPassword(req.body.password));
 
       res.status(201).json({});
     }
