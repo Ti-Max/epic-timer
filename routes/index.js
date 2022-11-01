@@ -18,10 +18,14 @@ router.get("/", async function (req, res, next) {
 
     solveData.time = formatTime(solve.time, 2);
     if (solve.ao5)
-      solveData.ao5 = (solve.ao5.toFixed(2) == "0.00") ? undefined : solve.ao5.toFixed(2);
+      solveData.ao5 =
+        solve.ao5.toFixed(2) == "0.00" ? undefined : solve.ao5.toFixed(2);
     if (solve.ao12)
-      solveData.ao12 = (solve.ao12.toFixed(2) == "0.00") ? undefined : solve.ao12.toFixed(2);
-    solveData.id = result.length - i;
+      solveData.ao12 =
+        solve.ao12.toFixed(2) == "0.00" ? undefined : solve.ao12.toFixed(2);
+
+    solveData.idCategory = result.length - i;
+    solveData.id = solve.id;
 
     solves.push(solveData);
   }
