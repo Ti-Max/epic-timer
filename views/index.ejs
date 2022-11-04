@@ -80,7 +80,7 @@
       <div class="max-h-80 overflow-y-auto pr-3" id="solves">
 
         <% solves.forEach((solve)=>{ %>
-        <div class="flex">
+        <div class="flex" id="containerSolve<%= solve.id %>">
 
           <img src="./images/trashbin.svg" class="w-7 opacity-0 transition-all hover:cursor-pointer" id="trashbin<%= solve.id %>" onclick="deleteSelectedSolves()">
           <input type="checkbox" id="checkboxSolve<%= solve.id %>" class="hidden" onchange="selectSolve('<%= solve.id %>')">
@@ -101,7 +101,7 @@
     </div>
 
     <div class="selected-sovle"></div>
-  </body>
+</body>
 
 </html>
 <script>
@@ -187,9 +187,16 @@
       })
       .then((response) => response.json())
       .then(response => {
-        document.getElementById("solves").insertAdjacentHTML("afterbegin",
-          '<div class="flex p-1 pl-2 pr-2 m-1 rounded-md bg-tertiary  justify-between "><div class="text-xs align-text-top text-secondary">#' + (document.getElementById("solves").childElementCount + 1) + '</div><div class="text-base ml-1">' + formatTime(time, 2) + '</div></div>'
-        );
+        document.getElementById("solves").insertAdjacentHTML("afterbegin", `
+        <div class="flex" id="containerSolve${response.id}">
+          <img src="./images/trashbin.svg" class="w-7 opacity-0 transition-all hover:cursor-pointer" id="trashbin${response.id}" onclick="deleteSelectedSolves()">
+          <input type="checkbox" id="checkboxSolve${response.id}" class="hidden" onchange="selectSolve(${response.id})">
+          <label for="checkboxSolve${response.id}" class="flex p-1 pl-2 pr-2 m-1 rounded-md bg-tertiary  justify-between hover:bg-secondaryAlt hover:cursor-pointer" id="boxSolve${response.id}">
+            <div class="text-xs align-text-top text-secondary">#${document.getElementById("solves").childElementCount + 1}</div>
+            <div class="text-base ml-1">${formatTime(time, 2)}</div>
+          </label>
+        </div>
+        `);
         document.getElementById("ao5").innerText = response.ao5 !== 0 ? response.ao5.toFixed(2) : "-";
         document.getElementById("ao12").innerText = response.ao12 !== 0 ? response.ao12.toFixed(2) : "-";
       })
@@ -226,30 +233,31 @@
 
       text = hours + ":" + text;
     }
-    
+
     return text;
   }
-  
+
   const selectedSolves = [];
   let firstSelectedSolve;
+
   function selectSolve(id) {
-    const solve = document.getElementById("checkboxSolve"+id);
+    const solve = document.getElementById("checkboxSolve" + id);
     const boxSolve = document.getElementById("boxSolve" + id);
 
     // remove solve from selected
-    if (solve.checked === false){
+    if (solve.checked === false) {
       const index = selectedSolves.indexOf(id);
       selectedSolves.splice(index, 1);
       boxSolve.classList.remove("selected-solve");
 
       // Unchecked all
-      if (selectedSolves.length === 0){
+      if (selectedSolves.length === 0) {
         document.getElementById("trashbin" + firstSelectedSolve).style.opacity = '0%';
         return;
       }
-    }else{
+    } else {
       // first selected solve
-      if(selectedSolves.length === 0){
+      if (selectedSolves.length === 0) {
         firstSelectedSolve = id;
         document.getElementById("trashbin" + id).style.opacity = '100%';
       }
@@ -260,7 +268,30 @@
     }
   }
 
-  function deleteSelectedSolves(){
-    
+  function deleteSelectedSolves() {
+    // Remove from database
+    fetch('/deleteSolves', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        solves: selectedSolves,
+        category: "overall"
+      })
+    })
+    .then((response) => response.json())
+    .then(response => {
+      console.log("deleted")
+    })
+    .catch(err => console.log(err));
+
+    // Remove from HTML
+    for(let i = 0; i < selectedSolves.length; i++){
+      const elem = document.getElementById("containerSolve" + selectedSolves[i]);
+      elem.parentNode.removeChild(elem);
+    }
+
+    selectedSolves.length = 0;
   }
 </script>
