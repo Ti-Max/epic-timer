@@ -271,23 +271,24 @@
   function deleteSelectedSolves() {
     // Remove from database
     fetch('/deleteSolves', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        solves: selectedSolves,
-        category: "overall"
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          solves: selectedSolves,
+          category: "overall"
+        })
       })
-    })
-    .then((response) => response.json())
-    .then(response => {
-      console.log("deleted")
-    })
-    .catch(err => console.log(err));
+      .then((response) => response.json())
+      .then(response => {
+        document.getElementById("ao5").innerText = response.ao5 !== undefined && response.ao5 !== 0 ? response.ao5.toFixed(2) : "-";
+        document.getElementById("ao12").innerText = response.ao12 !== undefined && response.ao12 !== 0 ? response.ao12.toFixed(2) : "-";
+      })
+      .catch(err => console.log(err));
 
     // Remove from HTML
-    for(let i = 0; i < selectedSolves.length; i++){
+    for (let i = 0; i < selectedSolves.length; i++) {
       const elem = document.getElementById("containerSolve" + selectedSolves[i]);
       elem.parentNode.removeChild(elem);
     }
