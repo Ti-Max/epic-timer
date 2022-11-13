@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 
 const deleteSolves = require("./access/userActionsDB.js").deleteSolves;
+const getLastSolves = require("./access/userActionsDB.js").getLastSolves;
 const getSolvesSince = require("./access/userActionsDB.js").getSolvesSince;
 const getSolvesBeforeAmount =
   require("./access/userActionsDB.js").getSolvesBeforeAmount;
@@ -54,6 +55,14 @@ router.post("/deleteSolves", async function (req, res, next) {
     if (lastAOs.ao5 === undefined) {
       lastAOs.ao5 = ao5;
       lastAOs.ao12 = ao12;
+    }
+  }
+
+  if (lastAOs.ao5 === undefined){
+    const lastNewSolve = await getLastSolves(req.user_id, req.body.category, 1);
+    if (lastNewSolve.length !== 0){
+      lastAOs.ao5 = lastNewSolve[0].ao5;
+      lastAOs.ao12 = lastNewSolve[0].ao12;
     }
   }
 

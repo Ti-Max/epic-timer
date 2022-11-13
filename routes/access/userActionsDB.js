@@ -97,7 +97,7 @@ function insertSolve(user_id, category, time, ao5, ao12) {
 function getLastSolves(user_id, category, amount) {
   return new Promise(function (resolve, reject) {
     con.query(
-      "SELECT time, id FROM times WHERE users_id = ? AND category = ? ORDER BY date DESC LIMIT ?",
+      "SELECT time, id, ao5, ao12 FROM times WHERE users_id = ? AND category = ? ORDER BY date DESC LIMIT ?",
       [user_id, category, amount],
       function (err, result, fields) {
         if (err) throw err;
