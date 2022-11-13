@@ -27,9 +27,10 @@ router.post("/commitSolve", async function (req, res, next) {
 
   // insert solve to database
   await insertSolve(req.user_id, req.body.category, req.body.time, ao5, ao12);
-  return res.status(201).json({ao5: ao5, ao12: ao12});
+
+  const lastSolve = await getLastSolves(req.user_id, req.body.category, 1);
+
+  return res.status(201).json({ ao5: ao5, ao12: ao12, id: lastSolve[0].id});
 });
-
-
 
 module.exports = router;

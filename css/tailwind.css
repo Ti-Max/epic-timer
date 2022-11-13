@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  .selected-solve {
+    @apply border-secondary border-2 bg-secondaryAlt;
+  }
+}

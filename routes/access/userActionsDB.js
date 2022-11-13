@@ -97,11 +97,63 @@ function insertSolve(user_id, category, time, ao5, ao12) {
 function getLastSolves(user_id, category, amount) {
   return new Promise(function (resolve, reject) {
     con.query(
-      "SELECT time FROM times WHERE users_id = ? AND category = ? ORDER BY date DESC LIMIT ?",
+      "SELECT time, id FROM times WHERE users_id = ? AND category = ? ORDER BY date DESC LIMIT ?",
       [user_id, category, amount],
       function (err, result, fields) {
         if (err) throw err;
         resolve(result);
+      }
+    );
+  });
+}
+
+function getSolvesSince(user_id, category, firstId) {
+  return new Promise(function (resolve, reject) {
+    con.query(
+      "SELECT id FROM times WHERE users_id = ? AND category = ? AND id >= ? ORDER BY date DESC",
+      [user_id, category, firstId],
+      function (err, result, fields) {
+        if (err) throw err;
+        resolve(result);
+      }
+    );
+  });
+}
+
+function getSolvesBeforeAmount(user_id, category, firstId, amount) {
+  return new Promise(function (resolve, reject) {
+    con.query(
+      "SELECT time FROM times WHERE users_id = ? AND category = ? AND id <= ? ORDER BY date DESC LIMIT ?",
+      [user_id, category, firstId, amount],
+      function (err, result, fields) {
+        if (err) throw err;
+        resolve(result);
+      }
+    );
+  });
+}
+
+function deleteSolves(user_id, solves) {
+  return new Promise(function (resolve, reject) {
+    con.query(
+      "DELETE FROM times WHERE users_id = ? AND id IN (?)",
+      [user_id, solves],
+      function (err, result, fields) {
+        if (err) throw err;
+        resolve(result);
+      }
+    );
+  });
+}
+
+function updateAO(id, ao5, ao12) {
+  return new Promise(function (resolve, reject) {
+    con.query(
+      "UPDATE times SET ao5 = ?, ao12 = ? WHERE id = ?",
+      [ao5, ao12, id],
+      function (err, result, fields) {
+        if (err) throw err;
+        resolve();
       }
     );
   });
@@ -114,4 +166,8 @@ module.exports = {
   getSolvesfromCategory,
   insertSolve,
   getLastSolves,
+  deleteSolves,
+  getSolvesSince,
+  getSolvesBeforeAmount,
+  updateAO,
 };
