@@ -66,7 +66,8 @@ function addMove(moves) {
 function printScramble(moves) {
   let str = "";
   moves.forEach((move) => {
-    str += "\xa0\xa0" + move; // double space in between
+    str += str === "" ? "" : "\xa0\xa0"; // double space in between
+    str += move;
   });
 
   label.innerText = str;
