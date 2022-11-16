@@ -10,7 +10,40 @@
 </head>
 
 <body class="h-screen bg-backgroud text-text">
-  <div class="grid grid-rows-1 m-auto max-w-6xl p-4 min-h-screen">
+
+  <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+    <div class="text-[14rem] leading-[12rem] " id="timer">0.00</div>
+    <div class="flex justify-center items-center transition-all max-h-96 mt-12 hide-during-solve">
+      <div>
+        <div id="ao5" class="text-[4rem] text-secondary pr-2 pb-2 border-r-2 border-tertiary leading-[3rem]">
+          <% 
+          if(solves[0] !== undefined && solves[0].ao5 > 0)
+          {%>
+          <%=solves[0].ao5 %>
+          <%}else
+            {
+              %>-<%
+            }%>
+        </div>
+        <div class="text-[1rem] text-secondary text-center">ao5</div>
+      </div>
+      <div>
+        <div id="ao12" class="text-[4rem] text-secondary pl-2 pb-2 leading-[3rem]">
+          <% 
+            if(solves[0] !== undefined && solves[0].ao12 > 0)
+            {%>
+          <%=solves[0].ao12 %>
+          <%}else
+              {
+                %>-<%
+              }%>
+        </div>
+        <div class="text-[1rem] text-secondary text-center">ao12</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-rows-1 m-auto max-w-6xl p-4 min-h-screen transition-all hide-during-solve">
 
     <div class="flex justify-between">
       <div class="text-3xl text-primary">Epic Timer</div>
@@ -24,38 +57,6 @@
     <div class="flex items-center justify-center mt-16">
       <div id="scramble" class="text-text text-3xl"></div>
       <img src="images/refresh.svg" class="border-l-2 border-tertiary w-8 ml-2 hover:cursor-pointer hover:" onclick="updateScramble();">
-    </div>
-
-    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-      <div class="text-[14rem] leading-[12rem] mb-12" id="timer">0.00</div>
-      <div class="flex justify-center items-center">
-        <div>
-          <div id="ao5" class="text-[4rem] text-secondary pr-2 pb-2 border-r-2 border-tertiary leading-[3rem]">
-            <% 
-            if(solves[0] !== undefined && solves[0].ao5 > 0)
-            {%>
-            <%=solves[0].ao5 %>
-            <%}else
-              {
-                %>-<%
-              }%>
-          </div>
-          <div class="text-[1rem] text-secondary text-center">ao5</div>
-        </div>
-        <div>
-          <div id="ao12" class="text-[4rem] text-secondary pl-2 pb-2 leading-[3rem]">
-            <% 
-              if(solves[0] !== undefined && solves[0].ao12 > 0)
-              {%>
-            <%=solves[0].ao12 %>
-            <%}else
-                {
-                  %>-<%
-                }%>
-          </div>
-          <div class="text-[1rem] text-secondary text-center">ao12</div>
-        </div>
-      </div>
     </div>
 
     <div class="flex h-[70vh] justify-between items-center mb-16 ">
@@ -82,6 +83,9 @@
       <div class="text-secondary">Made by <a href="https://github.com/Ti-Max" class="transition-all text-primary hover:text-text">Ti-Max</a></div>
       <div class="text-secondary"> <a href="https://github.com/Ti-Max/epic-timer" class="transition-all text-primary hover:text-text">v1.0</a></div>
     </div>
+  </div>
+
+  <div class="hidden-element hidden">dummy</div>
 </body>
 
 </html>

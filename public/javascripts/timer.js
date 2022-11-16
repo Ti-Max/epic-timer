@@ -1,4 +1,5 @@
 const timer = document.getElementById("timer");
+const hideDuringSolve = document.getElementsByClassName("hide-during-solve");
 const waitMargin = 0.3;
 
 let time = 0.0;
@@ -22,6 +23,10 @@ document.addEventListener("keydown", (event) => {
     isWaited = false;
     timer.style.color = "red";
 
+    // Show elements
+    for (let block of hideDuringSolve) {
+      block.classList.remove("hidden-element");
+    }
     //Send solve to the database
     if (!event.repeat) commitSolve();
   } else if (!isTouched) {
@@ -34,6 +39,11 @@ document.addEventListener("keydown", (event) => {
       timer.innerText = "0.00";
       timer.style.color = "green";
       isWaited = true;
+
+      // Hide elements
+      for (let block of hideDuringSolve) {
+        block.classList.add("hidden-element");
+      }
     }, waitMargin * 1000);
   }
 });
