@@ -1,17 +1,18 @@
 # epic-timer
 A timer for speedcubing with auto sync with the cloud.
 
-# Environment variables
-NODE_ENV
+Access Epic Timer at <http://16.170.207.174/>
 
-PORT
+# Development
+- Create a local MySQL database using mwb model `database model - epicTimer.mwb`.
+- Copy `.env.example` to `.env`. Enter database credentials.
+- Install node dependencies with `npm install`.
+- Run `npm run watch` to start nodejs server and tailwind.
 
-DB_HOST
+# Production
+- Run npm `run production`
 
-DB_PORT
+# Contribution 
+Please, help me make Epic Timer better, make a Pull Request :)
 
-DB_USER
-
-DB_PASS
-
-TOKEN_KEY
+The speedcubing community needs a better timer!
