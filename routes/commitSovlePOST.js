@@ -1,5 +1,5 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 
 const insertSolve = require("./access/userActionsDB.js").insertSolve;
 const getLastSolves = require("./access/userActionsDB.js").getLastSolves;

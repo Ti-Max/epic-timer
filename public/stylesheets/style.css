@@ -410,6 +410,14 @@ video {
   height: auto;
 }
 
+.selected-solve {
+  border-width: 2px;
+  --tw-border-opacity: 1;
+  border-color: rgb(89 94 118 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(74 78 99 / var(--tw-bg-opacity));
+}
+
 .hidden-element {
   max-height: 0px !important;
   opacity: 0 !important;
