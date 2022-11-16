@@ -6,4 +6,24 @@
   .selected-solve {
     @apply border-secondary border-2 bg-secondaryAlt;
   }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    @apply bg-tertiary;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    @apply bg-secondary;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-secondaryAlt;
+  }
+  
 }
