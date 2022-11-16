@@ -160,7 +160,7 @@ let firstSelectedSolve;
 function selectSolve(id) {
   const solve = document.getElementById("checkboxSolve" + id);
   const boxSolve = document.getElementById("boxSolve" + id);
-  console.log("here");
+
   // remove solve from selected
   if (solve.checked === false) {
     unCheck();

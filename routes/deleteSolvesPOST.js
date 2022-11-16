@@ -14,7 +14,11 @@ router.post("/deleteSolves", async function (req, res, next) {
   await deleteSolves(req.user_id, req.body.solves);
 
   // Update ao5 and ao12 for every solve that was created before the deleted solves
-  const lastAOs = await updateAverage(req.body.solves, req.user_id, req.body.category);
+  const lastAOs = await updateAverage(
+    req.body.solves,
+    req.user_id,
+    req.body.category
+  );
 
   return res.status(201).json({ ao5: lastAOs.ao5, ao12: lastAOs.ao12 });
 });
