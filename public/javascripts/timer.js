@@ -74,8 +74,6 @@ document.addEventListener("keyup", (event) => {
 });
 
 function commitSolve() {
-  updateScramble();
-
   fetch("/commitSolve", {
     method: "POST",
     headers: {
@@ -84,6 +82,7 @@ function commitSolve() {
     body: JSON.stringify({
       time: time.toFixed(2),
       category: "overall",
+      scramble: document.getElementById("scramble").innerText,
     }),
   })
     .then((response) => response.json())
@@ -117,6 +116,8 @@ function commitSolve() {
         response.ao12 !== 0 ? response.ao12.toFixed(2) : "-";
     })
     .catch((err) => console.log(err));
+
+  updateScramble();
 }
 
 function tick() {

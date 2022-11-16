@@ -8,7 +8,7 @@ const calculateAO = require("./utils.js").calculateAO;
 
 router.post("/commitSolve", async function (req, res, next) {
   // Check request
-  if (!req.body.time || !req.body.category) {
+  if (!req.body.time || !req.body.category || !req.body.scramble) {
     return res.status(400).send("Bad Request");
   }
 
@@ -18,6 +18,7 @@ router.post("/commitSolve", async function (req, res, next) {
   solves.forEach((solve) => {
     solvesParsed.push(solve.time);
   });
+
   // add the newest solve
   solvesParsed.unshift(parseFloat(req.body.time));
 
@@ -26,11 +27,11 @@ router.post("/commitSolve", async function (req, res, next) {
   const ao5 = calculateAO(5, solvesParsed);
 
   // insert solve to database
-  await insertSolve(req.user_id, req.body.category, req.body.time, ao5, ao12);
+  await insertSolve(req.user_id, req.body.category, req.body.time, ao5, ao12, req.body.scramble);
 
   const lastSolve = await getLastSolves(req.user_id, req.body.category, 1);
 
-  return res.status(201).json({ ao5: ao5, ao12: ao12, id: lastSolve[0].id});
+  return res.status(201).json({ ao5: ao5, ao12: ao12, id: lastSolve[0].id });
 });
 
 module.exports = router;

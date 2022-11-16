@@ -81,11 +81,11 @@ function formatDate(date) {
 }
 
 // Insert one solve
-function insertSolve(user_id, category, time, ao5, ao12) {
+function insertSolve(user_id, category, time, ao5, ao12, scramble) {
   return new Promise(function (resolve, reject) {
     con.query(
-      "INSERT INTO times (users_id, category, date, time, ao5, ao12) VALUES(?, ?, ?, ?, ?, ?)",
-      [user_id, category, formatDate(new Date()), time, ao5, ao12],
+      "INSERT INTO times (users_id, category, date, time, ao5, ao12, scramble) VALUES(?, ?, ?, ?, ?, ?, ?)",
+      [user_id, category, formatDate(new Date()), time, ao5, ao12, scramble],
       function (err, result, fields) {
         if (err) throw err;
         resolve();
