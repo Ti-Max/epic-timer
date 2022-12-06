@@ -8,7 +8,7 @@ const auth = require("./routes/access/auth");
 const loginPOST = require("./routes/access/loginPOST");
 const signupPOST = require("./routes/access/signupPOST");
 const logoutPOST = require("./routes/access/logoutGET");
-const commitSolvePOST = require("./routes/commitSovlePOST");
+const commitSolvePOST = require("./routes/commitSolvePOST");
 const deleteSolvesPOST = require("./routes/deleteSolvesPOST");
 
 const accessRouter = require("./routes/access/access");
