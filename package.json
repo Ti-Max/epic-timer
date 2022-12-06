@@ -4,8 +4,8 @@
   "description": "A timer for speedcubing with auto sync with the cloud.",
   "main": "/src/app.js",
   "scripts": {
-    "watch": "NODE_ENV=development nodemon app.js -e ejs,js,css & npx tailwindcss -i css/tailwind.css -o public/stylesheets/style.css --watch",
-    "production": "npx tailwindcss -i css/tailwind.css -o public/stylesheets/style.css --minify & NODE_ENV=production node app.js"
+    "watch": "NODE_ENV=development nodemon app.js -e ejs,js,css & npx tailwindcss -i css/tailwind.css -o public/stylesheets/style.css --watch & npm -prefix frontend/ run watch",
+    "production": "npx tailwindcss -i css/tailwind.css -o public/stylesheets/style.css --minify & npm -prefix frontend/ run production & NODE_ENV=production node app.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
     "nodemon": "^2.0.16"
   },
   "devDependencies": {
+    "@types/react": "^18.0.25",
     "connect-livereload": "^0.6.1",
     "livereload": "^0.9.3",
     "tailwindcss": "^3.1.8"

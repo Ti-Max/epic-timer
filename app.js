@@ -22,7 +22,7 @@ if (app.get("env") === "development") {
   const livereload = require("livereload");
 
   const liveReloadServer = livereload.createServer();
-  liveReloadServer.watch(path.join(__dirname, "views"));
+  liveReloadServer.watch(path.join(__dirname, "views"), path.join(__dirname, "frontend/src"));
   const connectLivereload = require("connect-livereload");
   liveReloadServer.server.once("connection", () => {
     setTimeout(() => {
