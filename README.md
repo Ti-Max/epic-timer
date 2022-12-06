@@ -1,7 +1,9 @@
 # epic-timer
 A timer for speedcubing with auto sync with the cloud.
 
-Access Epic Timer at <http://16.170.207.174/>
+~~Access Epic Timer at <http://16.170.207.174/>~~
+
+> Not avaiable at the moment. Because of Amazon being too greedy
 
 # Development
 - Create a local MySQL database using mwb model `database model - epicTimer.mwb`.
