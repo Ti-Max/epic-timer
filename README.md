@@ -5,14 +5,13 @@ A timer for speedcubing with auto sync with the cloud.
 
 > Not avaiable at the moment. Because of Amazon being too greedy
 
-# Development
-- Create a local MySQL database using mwb model `database model - epicTimer.mwb`.
-- Copy `.env.example` to `.env`. Enter database credentials.
-- Install node dependencies with `npm install`.
-- Run `npm run watch` to start nodejs server and tailwind.
-
-# Production
-- Run npm `run production`
+# Installation
+- Install [Docker](https://docs.docker.com/get-docker/) and [Docker compose](https://docs.docker.com/compose/)
+- Run `make up` on the seperate terminal window to run database
+- Copy `.env.example` to `.env` and fill inn the file.
+- Install node dependencies with `npm i`.
+- Install frontend dependcies with `cd frontend && npm i && cd ../`
+- Run `npm run watch` to start application.
 
 # Contribution 
 Please, help me make Epic Timer better, make a Pull Request :)
