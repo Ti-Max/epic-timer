@@ -1,14 +1,14 @@
-require("dotenv").config();
+const path = require("path");
+require("dotenv").config({path: path.join(__dirname, "docker/.env")});
 
 const express = require("express");
-const path = require("path");
 const auth = require("./routes/access/auth");
 
 // Routes
 const loginPOST = require("./routes/access/loginPOST");
 const signupPOST = require("./routes/access/signupPOST");
 const logoutPOST = require("./routes/access/logoutGET");
-const commitSolvePOST = require("./routes/commitSovlePOST");
+const commitSolvePOST = require("./routes/commitSolvePOST");
 const deleteSolvesPOST = require("./routes/deleteSolvesPOST");
 
 const accessRouter = require("./routes/access/access");
@@ -22,7 +22,7 @@ if (app.get("env") === "development") {
   const livereload = require("livereload");
 
   const liveReloadServer = livereload.createServer();
-  liveReloadServer.watch(path.join(__dirname, "views"));
+  liveReloadServer.watch(path.join(__dirname, "views"), path.join(__dirname, "frontend/src"));
   const connectLivereload = require("connect-livereload");
   liveReloadServer.server.once("connection", () => {
     setTimeout(() => {
