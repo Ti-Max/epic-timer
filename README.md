@@ -1,9 +1,7 @@
 # epic-timer
 A timer for speedcubing with auto sync with the cloud.
 
-~~Access Epic Timer at <http://16.170.207.174/>~~
-
-> Not avaiable at the moment. Because of Amazon being too greedy
+Access Epic Timer at <http://172.104.233.163/>
 
 # Installation
 - Install [Docker](https://docs.docker.com/get-docker/) and [Docker compose](https://docs.docker.com/compose/)
