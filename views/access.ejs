@@ -5,39 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="stylesheets/style.css" />
-    <title>Epic timer</title>
+    <title>Epic Timer</title>
   </head>
-  <body>
-    <center>
-      <h1>Epic timer</h1>
-
-      <button onclick="showLogin();">Log in</button>
-      or
-      <button onclick="showSignup();">Create an account</button>
-
-      <br />
-      <br />
-      <br />
-
-      <div id="login-form" style="display: block">
-        <form onsubmit="login(event);">
-          <input type="text" id="username-login" placeholder="Username" />
-          <input type="password" id="password-login" placeholder="Password" />
-          <button>Login</button>
-        </form>
-        <br />
+  <body class="h-screen bg-backgroud text-text font-roboto">
+    <div class="grid h-screen place-items-center">
+      <div>
+        <div class="text-center text-primary text-7xl">Epic Timer</div>
+        
+        <div class="text-center text-secondaryAlt my-3">
+          <button class="text-text hover:text-secondary" onclick="showLogin();">Log in</button>
+          or
+          <button class="text-text hover:text-secondary" onclick="showSignup();">Create an account</button>
+        </div>
+        
+        <div id="login-form" style="display: block">
+          <form onsubmit="login(event);">
+            <input class="input-auth" type="text" id="username-login" placeholder="Username" />
+            <br>
+            <input class="input-auth" type="password" id="password-login" placeholder="Password" />
+            <br>
+            <button class="button-auth">Login</button>
+          </form>
+          <br />
+        </div>
+        <div id="signup-form" style="display: none">
+          <form onsubmit="signup(event);">
+            <input class="input-auth"type="text" id="username-signup" placeholder="Username" />
+            <br>
+            <input class="input-auth" type="email" id="email-signup" placeholder="Email" />
+            <br>
+            <input class="input-auth"type="password" id="password-signup" placeholder="Password" />
+            <br>
+            <button class="button-auth">Sign up</button>
+          </form>
+          <br />
+        </div>
+        <div class="error-message text-"></div>
       </div>
-      <div id="signup-form" style="display: none">
-        <form onsubmit="signup(event);">
-          <input type="text" id="username-signup" placeholder="Username" />
-          <input type="email" id="email-signup" placeholder="Email" />
-          <input type="password" id="password-signup" placeholder="Password" />
-          <button>Sign up</button>
-        </form>
-        <br />
-      </div>
-      <div class="error-message"></div>
-    </center>
+    </div>
   </body>
   <script>
     function showLogin() {

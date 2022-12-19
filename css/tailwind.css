@@ -1,8 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,600;1,400;1,600&display=swap');
+
 
 @layer base {
+  .input-auth {
+    @apply w-full mb-2 leading-10 bg-tertiary text-text px-3 rounded-md focus:border-0 !important;
+  }
+
+  .button-auth {
+    @apply bg-secondary rounded-md p-1 hover:bg-secondaryAlt;
+  }
+
   .selected-solve {
     @apply border-secondary border-2 bg-secondaryAlt;
   }
