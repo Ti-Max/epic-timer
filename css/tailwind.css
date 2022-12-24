@@ -10,7 +10,7 @@
   }
 
   .button-auth {
-    @apply bg-secondary rounded-md p-1 hover:bg-secondaryAlt;
+    @apply bg-secondary rounded-md py-1 px-2 hover:bg-secondaryAlt;
   }
 
   .selected-solve {
