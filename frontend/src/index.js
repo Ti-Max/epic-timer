@@ -1,9 +1,7 @@
 import React from "react";
-import ReactDOM from 'react-dom/client';
-// import TimerContainer from "./TimerContainer";
+import ReactDOM from "react-dom/client";
+import AuthForm from "./Auth";
 
-// const TimerRoot = ReactDOM.createRoot(document.getElementById("timer-container"));
+const AuthRoot = ReactDOM.createRoot(document.getElementById("auth-form-root"));
 
-// TimerRoot.render(
-//     <TimerContainer />
-// )
+AuthRoot.render(<AuthForm />);

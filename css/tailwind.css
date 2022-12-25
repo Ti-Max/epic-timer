@@ -5,11 +5,11 @@
 
 @layer base {
   .input-auth {
-    @apply mb-2 w-full rounded-md bg-tertiary px-3 leading-10 text-text focus:border-0 !important;
+    @apply mb-2 w-full rounded-md border-[1px] border-secondaryAlt bg-tertiary p-3 text-text focus:border-[1px] focus-visible:border-primary focus-visible:outline-none !important;
   }
 
   .button-auth {
-    @apply rounded-md bg-secondary py-1 px-2 hover:bg-secondaryAlt;
+    @apply w-full rounded-md bg-secondary p-2 text-2xl font-extrabold hover:bg-secondaryAlt focus-visible:bg-secondaryAlt focus-visible:outline-none;
   }
 
   .selected-solve {

@@ -4,6 +4,7 @@ module.exports = {
     secondary: '#595e76',
     secondaryAlt: '#4a4e63',
     tertiary: '#232531',
-    text: '#c6c8d1'
+    text: '#c6c8d1',
+    error: '#e27878'
   };
   
