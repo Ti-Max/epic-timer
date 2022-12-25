@@ -1,4 +1,4 @@
-const colors = require("../css/colors.js");
+const colors = require("../frontend/css/colors.js");
 
 const express = require("express");
 const router = express.Router();
