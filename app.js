@@ -13,6 +13,7 @@ const deleteSolvesPOST = require("./routes/deleteSolvesPOST");
 
 const accessRouter = require("./routes/access/access");
 const indexRouter = require("./routes/index");
+const cubein3d = require("./routes/cubeIn3d");
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -51,6 +52,8 @@ app.use(indexRouter);
 app.use(logoutPOST);
 app.use(commitSolvePOST);
 app.use(deleteSolvesPOST);
+app.use(cubein3d);
+
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);
