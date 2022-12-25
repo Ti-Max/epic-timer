@@ -1,24 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,600;1,400;1,600&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,600;1,400;1,600&display=swap");
 
 @layer base {
   .input-auth {
-    @apply w-full mb-2 leading-10 bg-tertiary text-text px-3 rounded-md focus:border-0 !important;
+    @apply mb-2 w-full rounded-md bg-tertiary px-3 leading-10 text-text focus:border-0 !important;
   }
 
   .button-auth {
-    @apply bg-secondary rounded-md py-1 px-2 hover:bg-secondaryAlt;
+    @apply rounded-md bg-secondary py-1 px-2 hover:bg-secondaryAlt;
   }
 
   .selected-solve {
-    @apply border-secondary border-2 bg-secondaryAlt;
+    @apply border-2 border-secondary bg-secondaryAlt;
   }
 
   .hidden-element {
-    @apply opacity-0 max-h-0 !important;
+    @apply max-h-0 opacity-0 !important;
     overflow: hidden;
   }
 
