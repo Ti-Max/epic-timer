@@ -7,7 +7,7 @@ const unVerifyToken = (req, res, next) => {
   if (token == null) {
     return next();
   }
-  jwt.verify(token, process.env.TOKEN_KEY, (err, user) => {
+  jwt.verify(token, process.env.TOKEN_KEY, (err) => {
     if (err) return next();
 
     return res.redirect("./");

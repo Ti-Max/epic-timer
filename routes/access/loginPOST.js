@@ -7,7 +7,7 @@ const unauth = require("../access/unauth");
 const comparePasswords = require("./crypto.js").comparePasswords;
 
 /* GET home page. */
-router.post("/login", unauth, async function (req, res, next) {
+router.post("/login", unauth, async function (req, res) {
   // Check input data
   if (!req.body.username || !req.body.password) {
     res.status(401).json({ error: "Missing username or password" });

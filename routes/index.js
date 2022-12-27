@@ -8,7 +8,7 @@ const getSolvesfromCategory =
   require("./access/userActionsDB.js").getSolvesfromCategory;
 
 /* GET home page. */
-router.get("/", async function (req, res, next) {
+router.get("/", async function (req, res) {
   // Get solves from database
   const result = await getSolvesfromCategory(req.user_id, "overall");
   const solves = [];

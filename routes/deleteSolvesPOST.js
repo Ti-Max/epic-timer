@@ -4,7 +4,7 @@ const router = express.Router();
 const { updateAverage } = require("./updateAverage.js");
 const deleteSolves = require("./access/userActionsDB.js").deleteSolves;
 
-router.post("/deleteSolves", async function (req, res, next) {
+router.post("/deleteSolves", async function (req, res) {
   // Check request
   if (!Array.isArray(req.body.solves) || !req.body.category) {
     return res.status(400).send("Bad Request");

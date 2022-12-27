@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const unauth = require("./unauth");
 
-router.get("/logout", function (req, res, next) {
+router.get("/logout", function (req, res) {
   res.cookie("token", { expires: Date.now() });
   res.redirect("/access");
 });

@@ -6,7 +6,7 @@ const getLastSolves = require("./access/userActionsDB.js").getLastSolves;
 
 const calculateAO = require("./utils.js").calculateAO;
 
-router.post("/commitSolve", async function (req, res, next) {
+router.post("/commitSolve", async function (req, res) {
   // Check request
   if (!req.body.time || !req.body.category || !req.body.scramble) {
     return res.status(400).send("Bad Request");

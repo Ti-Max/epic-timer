@@ -11,6 +11,4 @@ const con = mysql.createPool({
   queueLimit: 0,
 });
 
-let sess;
-
 module.exports = con;

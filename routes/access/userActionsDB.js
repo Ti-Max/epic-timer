@@ -2,16 +2,11 @@ const con = require("../../dbConnection.js");
 
 // Creates a new user
 function createUser(name, email, password) {
-  return new Promise(function (resolve, reject) {
+  return new Promise(function (resolve) {
     con.query(
-      'INSERT INTO users (email, username, password) VALUES ("' +
-        email +
-        '", "' +
-        name +
-        '", "' +
-        password +
-        '")',
-      function (err, result, fields) {
+      "INSERT INTO users (email, username, password) VALUES (?, ?, ?)",
+      [email, name, password],
+      function (err) {
         if (err) throw err;
         resolve();
       }
@@ -21,11 +16,11 @@ function createUser(name, email, password) {
 
 // Get users info from db
 function getInfoByUsername(username) {
-  return new Promise(function (resolve, reject) {
+  return new Promise(function (resolve) {
     con.query(
       "SELECT * FROM users WHERE username = ?",
       [username],
-      function (err, result, fields) {
+      function (err, result) {
         if (err) throw err;
         resolve(result);
       }
@@ -34,11 +29,11 @@ function getInfoByUsername(username) {
 }
 
 function getInfoByEmail(email) {
-  return new Promise(function (resolve, reject) {
+  return new Promise(function (resolve) {
     con.query(
       "SELECT * FROM users WHERE email = ?",
       [email],
-      function (err, result, fields) {
+      function (err, result) {
         if (err) throw err;
         resolve(result);
       }
@@ -48,11 +43,11 @@ function getInfoByEmail(email) {
 
 // Get all solves from the category
 function getSolvesfromCategory(user_id, category) {
-  return new Promise(function (resolve, reject) {
+  return new Promise(function (resolve) {
     con.query(
       "SELECT * FROM times WHERE users_id = ? AND category = ? ORDER BY date DESC",
       [user_id, category],
-      function (err, result, fields) {
+      function (err, result) {
         if (err) throw err;
         resolve(result);
       }
@@ -82,11 +77,11 @@ function formatDate(date) {
 
 // Insert one solve
 function insertSolve(user_id, category, time, ao5, ao12, scramble) {
-  return new Promise(function (resolve, reject) {
+  return new Promise(function (resolve) {
     con.query(
       "INSERT INTO times (users_id, category, date, time, ao5, ao12, scramble) VALUES(?, ?, ?, ?, ?, ?, ?)",
       [user_id, category, formatDate(new Date()), time, ao5, ao12, scramble],
-      function (err, result, fields) {
+      function (err) {
         if (err) throw err;
         resolve();
       }
@@ -95,11 +90,11 @@ function insertSolve(user_id, category, time, ao5, ao12, scramble) {
 }
 
 function getLastSolves(user_id, category, amount) {
-  return new Promise(function (resolve, reject) {
+  return new Promise(function (resolve) {
     con.query(
       "SELECT time, id, ao5, ao12 FROM times WHERE users_id = ? AND category = ? ORDER BY date DESC LIMIT ?",
       [user_id, category, amount],
-      function (err, result, fields) {
+      function (err, result) {
         if (err) throw err;
         resolve(result);
       }
@@ -108,11 +103,11 @@ function getLastSolves(user_id, category, amount) {
 }
 
 function getSolvesSince(user_id, category, firstId) {
-  return new Promise(function (resolve, reject) {
+  return new Promise(function (resolve) {
     con.query(
       "SELECT id FROM times WHERE users_id = ? AND category = ? AND id >= ? ORDER BY date DESC",
       [user_id, category, firstId],
-      function (err, result, fields) {
+      function (err, result) {
         if (err) throw err;
         resolve(result);
       }
@@ -121,11 +116,11 @@ function getSolvesSince(user_id, category, firstId) {
 }
 
 function getSolvesBeforeAmount(user_id, category, firstId, amount) {
-  return new Promise(function (resolve, reject) {
+  return new Promise(function (resolve) {
     con.query(
       "SELECT time FROM times WHERE users_id = ? AND category = ? AND id <= ? ORDER BY date DESC LIMIT ?",
       [user_id, category, firstId, amount],
-      function (err, result, fields) {
+      function (err, result) {
         if (err) throw err;
         resolve(result);
       }
@@ -134,11 +129,11 @@ function getSolvesBeforeAmount(user_id, category, firstId, amount) {
 }
 
 function deleteSolves(user_id, solves) {
-  return new Promise(function (resolve, reject) {
+  return new Promise(function (resolve) {
     con.query(
       "DELETE FROM times WHERE users_id = ? AND id IN (?)",
       [user_id, solves],
-      function (err, result, fields) {
+      function (err, result) {
         if (err) throw err;
         resolve(result);
       }
@@ -147,11 +142,11 @@ function deleteSolves(user_id, solves) {
 }
 
 function updateAO(id, ao5, ao12) {
-  return new Promise(function (resolve, reject) {
+  return new Promise(function (resolve) {
     con.query(
       "UPDATE times SET ao5 = ?, ao12 = ? WHERE id = ?",
       [ao5, ao12, id],
-      function (err, result, fields) {
+      function (err) {
         if (err) throw err;
         resolve();
       }

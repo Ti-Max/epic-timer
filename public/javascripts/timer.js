@@ -1,3 +1,6 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
+/* eslint-disable indent */
 const timer = document.getElementById("timer");
 const hideDuringSolve = document.getElementsByClassName("hide-during-solve");
 const waitMargin = 0.3;
