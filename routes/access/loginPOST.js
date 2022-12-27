@@ -19,7 +19,9 @@ router.post("/login", unauth, async function (req, res, next) {
       res.status(401).json({ error: "User does not exist" });
     } else {
       // Check if password is correct
-      if (await comparePasswords(req.body.password, rows[0].password ) === false) {
+      if (
+        (await comparePasswords(req.body.password, rows[0].password)) === false
+      ) {
         res.status(401).json({ error: "Wrong password" });
       } else {
         // Create token

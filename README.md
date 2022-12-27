@@ -1,9 +1,11 @@
 # epic-timer
+
 A timer for speedcubing with auto sync with the cloud.
 
 Access Epic Timer at <http://172.104.233.163/>
 
 # Installation
+
 - Install [Docker](https://docs.docker.com/get-docker/) and [Docker compose](https://docs.docker.com/compose/)
 - Run `make up` on the seperate terminal window to run database
 - Copy `.env.example` to `.env` and fill inn the file.
@@ -11,7 +13,8 @@ Access Epic Timer at <http://172.104.233.163/>
 - Install frontend dependcies with `cd frontend && npm i && cd ../`
 - Run `npm run watch` to start application.
 
-# Contribution 
+# Contribution
+
 Please, help me make Epic Timer better, make a Pull Request :)
 
 The speedcubing community needs a better timer!

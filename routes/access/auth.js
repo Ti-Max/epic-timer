@@ -12,7 +12,7 @@ const verifyToken = (req, res, next) => {
 
     req.username = userinfo.username;
     req.user_id = userinfo.user_id;
-    
+
     return next();
   });
 };

@@ -28,7 +28,11 @@ router.post("/signup", async function (req, res, next) {
       return res.status(409).json({ error: "Email already in use" });
     } else {
       // Create user
-      await createUser(req.body.username, req.body.email, await hashPassword(req.body.password));
+      await createUser(
+        req.body.username,
+        req.body.email,
+        await hashPassword(req.body.password)
+      );
 
       res.status(201).json({});
     }

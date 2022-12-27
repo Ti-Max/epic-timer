@@ -80,7 +80,7 @@ class AuthForm extends React.Component {
   render() {
     if (this.state.authMethod === "login") {
       return (
-        <div className="bg-tertiary p-4 rounded-xl">
+        <div className="rounded-xl bg-tertiary p-4">
           <div id="login-form">
             <form onSubmit={this.login}>
               <input
@@ -107,7 +107,7 @@ class AuthForm extends React.Component {
       );
     }
     return (
-      <div className="bg-tertiary p-4 rounded-xl">
+      <div className="rounded-xl bg-tertiary p-4">
         <div id="signup-form">
           <form onSubmit={this.signup}>
             <input
@@ -144,7 +144,7 @@ class AuthForm extends React.Component {
 
 function ChooseMethod(props) {
   return (
-    <div className="text-center text-secondaryAlt mt-3">
+    <div className="mt-3 text-center text-secondaryAlt">
       or&nbsp;
       <button
         className="text-primary hover:text-secondary"

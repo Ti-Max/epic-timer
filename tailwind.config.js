@@ -6,8 +6,8 @@ module.exports = {
   theme: {
     colors: colors,
     fontFamily: {
-      'roboto': ['Roboto', 'sans-serif'],
-    }
+      roboto: ["Roboto", "sans-serif"],
+    },
   },
   plugins: [],
 };

@@ -27,7 +27,14 @@ router.post("/commitSolve", async function (req, res, next) {
   const ao5 = calculateAO(5, solvesParsed);
 
   // insert solve to database
-  await insertSolve(req.user_id, req.body.category, req.body.time, ao5, ao12, req.body.scramble);
+  await insertSolve(
+    req.user_id,
+    req.body.category,
+    req.body.time,
+    ao5,
+    ao12,
+    req.body.scramble
+  );
 
   const lastSolve = await getLastSolves(req.user_id, req.body.category, 1);
 

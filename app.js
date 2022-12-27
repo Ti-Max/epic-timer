@@ -1,5 +1,5 @@
 const path = require("path");
-require("dotenv").config({path: path.join(__dirname, "docker/.env")});
+require("dotenv").config({ path: path.join(__dirname, "docker/.env") });
 
 const express = require("express");
 const auth = require("./routes/access/auth");
@@ -22,7 +22,10 @@ if (app.get("env") === "development") {
   const livereload = require("livereload");
 
   const liveReloadServer = livereload.createServer();
-  liveReloadServer.watch(path.join(__dirname, "views"), path.join(__dirname, "frontend/src"));
+  liveReloadServer.watch(
+    path.join(__dirname, "views"),
+    path.join(__dirname, "frontend/src")
+  );
   const connectLivereload = require("connect-livereload");
   liveReloadServer.server.once("connection", () => {
     setTimeout(() => {
