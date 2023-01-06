@@ -18,3 +18,10 @@ Access Epic Timer at <http://172.104.233.163/>
 Please, help me make Epic Timer better, make a Pull Request :)
 
 The speedcubing community needs a better timer!
+
+
+# License
+
+GNU General Public License v3.0 only
+
+See [COPYING](COPYING) to see the full text.
