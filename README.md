@@ -2,7 +2,7 @@
 
 A timer for speedcubing with auto sync with the cloud.
 
-Access Epic Timer at <http://172.104.233.163/>
+Access release version of Epic Timer at <http://172.104.233.163/>
 
 # Installation
 
