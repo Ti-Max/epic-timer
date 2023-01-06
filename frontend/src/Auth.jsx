@@ -78,6 +78,7 @@ class AuthForm extends React.Component {
   }
 
   render() {
+    // render login or signup form
     if (this.state.authMethod === "login") {
       return (
         <div className="rounded-xl bg-tertiary p-4">

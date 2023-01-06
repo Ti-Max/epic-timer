@@ -6,4 +6,6 @@ module.exports = {
   tertiary: "#232531",
   text: "#c6c8d1",
   error: "#e27878",
+  timerPressed: "red",
+  timerReady: "green",
 };

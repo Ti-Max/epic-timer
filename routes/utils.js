@@ -1,6 +1,7 @@
 function calculateAO(aoX, solves) {
   if (solves.length < aoX) return 0;
 
+  console.log(solves);
   solves.length = aoX;
   // remove the best solve
   const max = Math.max(...solves);

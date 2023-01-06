@@ -1,4 +1,3 @@
-const label = document.getElementById("scramble");
 const scrambleLength = 20;
 
 const moveList = [
@@ -31,16 +30,7 @@ const opposite = {
   F: "B",
 };
 
-updateScramble();
-
-function updateScramble() {
-  const moves = [];
-  addMove(moves);
-
-  printScramble(moves);
-}
-
-function addMove(moves) {
+const addMove = (moves) => {
   // Get random move from the moveList
   const move = moveList[Math.floor(Math.random() * moveList.length)];
 
@@ -61,14 +51,23 @@ function addMove(moves) {
   if (moves.length !== scrambleLength) {
     addMove(moves);
   }
-}
+};
 
-function printScramble(moves) {
+const formatScramble = (moves) => {
   let str = "";
   moves.forEach((move) => {
     str += str === "" ? "" : "\xa0\xa0"; // double space in between
     str += move;
   });
 
-  label.innerText = str;
-}
+  return str;
+};
+
+const getNewScramble = () => {
+  const moves = [];
+  addMove(moves);
+
+  return formatScramble(moves);
+};
+
+export default getNewScramble;

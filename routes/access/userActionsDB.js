@@ -76,53 +76,17 @@ function formatDate(date) {
 }
 
 // Insert one solve
-function insertSolve(user_id, category, time, ao5, ao12, scramble) {
+function insertSolve(user_id, uuid, category, time, scramble) {
   return new Promise(function (resolve) {
     con.query(
-      "INSERT INTO times (users_id, category, date, time, ao5, ao12, scramble) VALUES(?, ?, ?, ?, ?, ?, ?)",
-      [user_id, category, formatDate(new Date()), time, ao5, ao12, scramble],
+      "INSERT INTO times (users_id, uuid, category, date, time, scramble) VALUES(?, ?, ?, ?, ?, ?)",
+      [user_id, uuid, category, formatDate(new Date()), time, scramble],
       function (err) {
-        if (err) throw err;
+        if (err) {
+          if (err.code === "ER_DUP_ENTRY") console.log("dublicate uuid");
+          else throw err;
+        }
         resolve();
-      }
-    );
-  });
-}
-
-function getLastSolves(user_id, category, amount) {
-  return new Promise(function (resolve) {
-    con.query(
-      "SELECT time, id, ao5, ao12 FROM times WHERE users_id = ? AND category = ? ORDER BY date DESC LIMIT ?",
-      [user_id, category, amount],
-      function (err, result) {
-        if (err) throw err;
-        resolve(result);
-      }
-    );
-  });
-}
-
-function getSolvesSince(user_id, category, firstId) {
-  return new Promise(function (resolve) {
-    con.query(
-      "SELECT id FROM times WHERE users_id = ? AND category = ? AND id >= ? ORDER BY date DESC",
-      [user_id, category, firstId],
-      function (err, result) {
-        if (err) throw err;
-        resolve(result);
-      }
-    );
-  });
-}
-
-function getSolvesBeforeAmount(user_id, category, firstId, amount) {
-  return new Promise(function (resolve) {
-    con.query(
-      "SELECT time FROM times WHERE users_id = ? AND category = ? AND id <= ? ORDER BY date DESC LIMIT ?",
-      [user_id, category, firstId, amount],
-      function (err, result) {
-        if (err) throw err;
-        resolve(result);
       }
     );
   });
@@ -131,24 +95,11 @@ function getSolvesBeforeAmount(user_id, category, firstId, amount) {
 function deleteSolves(user_id, solves) {
   return new Promise(function (resolve) {
     con.query(
-      "DELETE FROM times WHERE users_id = ? AND id IN (?)",
+      "DELETE FROM times WHERE users_id = ? AND uuid IN (?)",
       [user_id, solves],
       function (err, result) {
         if (err) throw err;
         resolve(result);
-      }
-    );
-  });
-}
-
-function updateAO(id, ao5, ao12) {
-  return new Promise(function (resolve) {
-    con.query(
-      "UPDATE times SET ao5 = ?, ao12 = ? WHERE id = ?",
-      [ao5, ao12, id],
-      function (err) {
-        if (err) throw err;
-        resolve();
       }
     );
   });
@@ -160,9 +111,5 @@ module.exports = {
   getInfoByEmail,
   getSolvesfromCategory,
   insertSolve,
-  getLastSolves,
   deleteSolves,
-  getSolvesSince,
-  getSolvesBeforeAmount,
-  updateAO,
 };

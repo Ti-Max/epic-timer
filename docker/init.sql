@@ -23,21 +23,18 @@ DEFAULT CHARACTER SET = utf8mb3;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `epicTimer`.`times` (
   `users_id` INT UNSIGNED NOT NULL,
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `uuid` VARCHAR(11) NOT NULL,
   `category` VARCHAR(45) NULL DEFAULT NULL,
   `date` DATETIME NULL DEFAULT NULL,
   `time` FLOAT UNSIGNED NULL DEFAULT NULL,
-  `ao5` FLOAT UNSIGNED NULL DEFAULT NULL,
-  `ao12` FLOAT UNSIGNED NULL DEFAULT NULL,
   `scramble` VARCHAR(78) NULL DEFAULT NULL,
   `penalty` VARCHAR(3) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`uuid`),
   INDEX `fk_times_users_idx` (`users_id` ASC) VISIBLE,
   CONSTRAINT `fk_times_users`
     FOREIGN KEY (`users_id`)
     REFERENCES `epicTimer`.`users` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 0
 DEFAULT CHARACTER SET = utf8mb3;
 
 
