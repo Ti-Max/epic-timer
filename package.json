@@ -5,7 +5,8 @@
   "main": "/src/app.js",
   "scripts": {
     "watch": "NODE_ENV=development nodemon app.js -e ejs,js,css & npx tailwindcss -i frontend/css/tailwind.css -o public/stylesheets/style.css --watch & npm -prefix frontend/ run watch",
-    "production": "npx tailwindcss -i frontend/css/tailwind.css -o public/stylesheets/style.css --minify & npm -prefix frontend/ run production & NODE_ENV=production node app.js"
+    "production": "npx tailwindcss -i frontend/css/tailwind.css -o public/stylesheets/style.css --minify & npm -prefix frontend/ run production & NODE_ENV=production node app.js",
+    "build": "npx tailwindcss -i frontend/css/tailwind.css -o public/stylesheets/style.css --minify & npm -prefix frontend/ run build"
   },
   "repository": {
     "type": "git",
