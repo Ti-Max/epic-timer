@@ -11,7 +11,7 @@ Access release version of Epic Timer at <http://172.104.233.163/>
 - Copy `.env.example` to `.env` and fill inn the file.
 - Install node dependencies with `npm i`.
 - Install frontend dependcies with `cd frontend && npm i && cd ../`
-- Run `npm run watch` to start application.
+- Run `npm run watch` to start development or `npm run build` to build the app for production.
 
 # Contribution
 
