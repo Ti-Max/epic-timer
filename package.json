@@ -29,7 +29,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "@types/react": "^18.0.27",
+    "@types/react": "^18.2.0",
     "connect-livereload": "^0.6.1",
     "livereload": "^0.9.3",
     "prettier": "^2.8.3",
